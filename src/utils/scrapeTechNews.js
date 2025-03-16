@@ -8,7 +8,8 @@ const axios = require('axios');
 async function fetchHackerNewsArticles ( limit ) {
     try {
         // get list of top story IDs
-        const topStoriesUrl = 'https://hacker-news.firebaseio.com/v0/topstories.json';
+        // const topStoriesUrl = 'https://hacker-news.firebaseio.com/v0/topstories.json';
+        const topStoriesUrl = 'https://hacker-news.firebaseio.com/v0/newstories.json';
         const { data: storyIds } = await axios.get(topStoriesUrl);
 
         // get details of the top 'limit' stories
