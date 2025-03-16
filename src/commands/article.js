@@ -6,7 +6,7 @@ module.exports = {
     async execute(interaction) {
         await interaction.reply("fetching tech articles");
 
-        const articles = await fetchHackerNewsArticles(10);
+        const articles = await fetchHackerNewsArticles(20);
 
         if (articles.length == 0) {
             return interaction.followUp("No tech articles found");
@@ -14,7 +14,7 @@ module.exports = {
 
         const selectedArticles = articles
         .sort(() => Math.random() - 0.5)  // shuffle array of articles
-        .slice(0, 3); // pick first 3 after shuffle
+        .slice(0, 1); // pick first 1 after shuffle
 
         // format articles into discord msg
         const msg = selectedArticles.map((a, i) => `**${i + 1}.** [${a.title}](${a.url})`).join("\n");
