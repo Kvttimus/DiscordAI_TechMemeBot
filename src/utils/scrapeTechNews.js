@@ -5,7 +5,7 @@
 const axios = require('axios');
 
 // limit: # of tech articles scraped
-async function fetchHackerNewsArticles ( limit = 5 ) {
+async function fetchHackerNewsArticles ( limit ) {
     try {
         // get list of top story IDs
         const topStoriesUrl = 'https://hacker-news.firebaseio.com/v0/topstories.json';
@@ -19,7 +19,7 @@ async function fetchHackerNewsArticles ( limit = 5 ) {
                 const { data: story } = await axios.get(storyUrl);
                 console.log(`found title: ${story.title}`)  // DEBUG
                 console.log(`found url: ${story.url}`)  // DEBUG
-                
+
                 // the story?.title returns undefined/null instead of an error
                 return { title: story?.title, url: story.url };  
             })
@@ -34,6 +34,6 @@ async function fetchHackerNewsArticles ( limit = 5 ) {
 };
 
 // test function
-fetchHackerNewsArticles().then(console.log());
+// fetchHackerNewsArticles(3).then(console.log());
 
 module.exports = {fetchHackerNewsArticles};
