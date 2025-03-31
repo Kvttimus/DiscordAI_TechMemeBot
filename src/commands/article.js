@@ -1,4 +1,9 @@
-const { fetchHackerNewsArticles } = require("../utils/scrapeTechNews");
+// const path = require('path');
+// const { fetchHackerNewsArticles } = require("../utils/scrapeTechNews").config({
+//     path: path.resolve(__dirname, '../utils/scrapeTechNews')
+// });
+
+const { fetchHackerNewsArticles } = require("../utils/scrapeTechNews")
 
 module.exports = {
     name: 'article', 

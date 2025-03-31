@@ -4,14 +4,16 @@
 */
 
 // Load the environment variables using dotenv package
-require('dotenv').config({path: '../.env'});
+const path = require('path');
+require('dotenv').config({
+    path: path.resolve(__dirname, '../.env')
+});
 
 // Defining constants
 const { Client, GatewayIntentBits, REST, Routes } = require('discord.js');  // allows bot to receive msgs, etc.
 const registerCmds = require('./utils/cmdHandler');
 const token = process.env.DISCORD_TOKEN;  // get bot token from .env
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });  // create a new client instance
-
 
 
 // Load all commands

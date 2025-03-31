@@ -3,7 +3,10 @@
 */
 
 // Load the environment variables using dotenv package
-require('dotenv').config({path: '../.env'});
+const path = require('path');
+require('dotenv').config({
+    path: path.resolve(__dirname, '../../.env')
+});
 
 const axios = require('axios');
 
@@ -19,7 +22,7 @@ async function classifyTechArticle ( title ) {
             model: "gpt-4",
             messages: [
                 { role: "system", content: "Classify the following article title as either STEM-related (Technology, IT, STEM, Math, Physics, Computers, Engineering, Cybersecurity, etc.) or not."},
-                { role: "user", content: `Title: ${title}". Answer only with "STEM" or "NOT STEM". Also, classify all political news articles (e.g. Elon Musk or Trump) as "NOT STEM".`}
+                { role: "user", content: `Title: ${title}". Answer only with "STEM" or "NOT STEM". Also, classify all political news articles (e.g. Elon Musk or Trump) and articles about people as "NOT STEM" Furthermore, the "STEM" articles should all be educational and cool, and preferably cybersecurity related. The articles should all be news-ish, no github links.`}
             ]
         });
 
@@ -64,7 +67,7 @@ async function fetchHackerNewsArticles ( limit ) {
         // return articles;
         return articles.filter(article => article !== null).slice(0, limit);
     } catch (error) {
-        console.log("error fetching HackerNews articles", error);
+        console.log(`error fetching HackerNews articles: ${error}`);
         return [];
     }
 };

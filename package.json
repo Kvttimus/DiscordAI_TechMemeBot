@@ -21,6 +21,8 @@
     "axios": "^1.8.1",
     "discord.js": "^14.18.0",
     "dotenv": "^16.4.7",
-    "openai": "^4.87.3"
+    "openai": "^4.87.3",
+    "reddit-fetch": "^1.5.1",
+    "snoowrap": "^1.23.0"
   }
 }
