@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const storagePath = path.join(__dirname, 'channelStorage.json');
+// const fs = require('fs');
+// const path = require('path');
+// const storagePath = path.join(__dirname, 'channelStorage.json');
 
 // function getTargetChannel(client) {
 //     try {
@@ -17,7 +17,18 @@ const storagePath = path.join(__dirname, 'channelStorage.json');
 //     fs.writeFileSync(storagePath, JSON.stringify(data, null, 2));
 // }
 
-// module.exports = {
-//     getTargetChannel,
-//     saveTargetChannel
-// };
+
+let targetChannelId = null;
+
+function saveTargetChannel(id) {
+    targetChannelId = id;
+}
+
+function getTargetChannel(client) {
+    return targetChannelId ? client.channels.cache.get(targetChannelId) : null;
+}
+
+module.exports = {
+    getTargetChannel,
+    saveTargetChannel
+};

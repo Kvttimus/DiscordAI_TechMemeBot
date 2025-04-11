@@ -1,8 +1,12 @@
+const { SlashCommandBuilder } = require('discord.js');
 const { fetchMemes } = require("../utils/scrapeTechMemes");
 
 module.exports = {
     name: 'memes', 
     description: 'Sends tech memes',
+    data: new SlashCommandBuilder()
+        .setName('memes')
+        .setDescription('Sends tech memes'),
     async execute(interaction) {
         await interaction.reply("fetching tech memes");
 

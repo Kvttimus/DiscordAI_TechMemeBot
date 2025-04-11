@@ -3,11 +3,15 @@
 //     path: path.resolve(__dirname, '../utils/scrapeTechNews')
 // });
 
+const { SlashCommandBuilder } = require('discord.js');
 const { fetchHackerNewsArticles } = require("../utils/scrapeTechNews")
 
 module.exports = {
     name: 'article', 
     description: 'Sends tech articles',
+    data: new SlashCommandBuilder()
+        .setName('article')
+        .setDescription('Sends tech articles'),
     async execute(interaction) {
         await interaction.reply("fetching tech articles");
 
