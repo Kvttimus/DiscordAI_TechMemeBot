@@ -1,6 +1,6 @@
-// const fs = require('fs');
-// const path = require('path');
-// const storagePath = path.join(__dirname, 'channelStorage.json');
+const fs = require('fs');
+const path = require('path');
+const storagePath = path.join(__dirname, 'channelStorage.json');
 
 // function getTargetChannel(client) {
 //     try {
@@ -20,12 +20,25 @@
 
 let targetChannelId = null;
 
+// load from channelStorage.json at startup
+try {
+    const data = JSON.parse(fs.readFileSync(storagePath, 'utf-8'));
+    targetChannelId = data.channelId;
+} catch (err) {
+    targetChannelId = null;
+}
+
 function saveTargetChannel(id) {
     targetChannelId = id;
+    fs.writeFileSync(storagePath, JSON.stringify({ channelId : id }), 'utf-8');
+    console.log(`The channel was set to ${targetChannelId}`);
 }
 
 function getTargetChannel(client) {
-    return targetChannelId ? client.channels.cache.get(targetChannelId) : null;
+    if (!targetChannelId) return null;  // if targetChannelId is not set, it will return null
+
+    const channel = client.channels.cache.get(targetChannelId);  // looks up channel id in cache
+    return channel || null; 
 }
 
 module.exports = {
