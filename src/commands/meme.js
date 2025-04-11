@@ -10,7 +10,7 @@ module.exports = {
     async execute(interaction) {
         await interaction.reply("fetching tech memes");
 
-        const memes = await fetchMemes(4);
+        const memes = await fetchMemes(30);
 
         if (memes.length == 0) {
             return interaction.followUp("No tech memes found");
@@ -21,9 +21,12 @@ module.exports = {
         .slice(0, 1); // pick first 1 after shuffle
 
         // format articles into discord msg
-        const msg = selectedMemes.map((a, i) => `**${i + 1}.** [${a.title}](${a.url})`).join("\n");
+        // const msg = selectedMemes.map((a, i) => `**${i + 1}.** [${a.title}](${a.url})`).join("\n");
+        const msg = selectedMemes.map((a, i) => `[${a.title}](${a.url})`).join("\n");
 
-        await interaction.followUp(`**Top Tech Meme:**\n\n${msg}`);
+
+        // await interaction.followUp(`**Cool Tech Meme:**\n\n${msg}`);
+        await interaction.followUp(`${msg}`);
     }
 };
 
